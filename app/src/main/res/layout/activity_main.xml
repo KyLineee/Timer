@@ -4,6 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#000000"
+    android:backgroundTint="#000000"
     tools:context=".MainActivity">
 
     <TextView
@@ -11,6 +13,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="0000"
+        android:textColor="#FFFFFF"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -18,15 +21,43 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.639" />
 
-    <TimePicker
-        android:id="@+id/timePicker"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
+    <NumberPicker
+        android:id="@+id/hourPicker"
+        android:layout_width="100dp"
+        android:layout_height="300dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginEnd="8dp"
+        android:descendantFocusability="blocksDescendants"
+        app:layout_constraintBottom_toBottomOf="@+id/minutePicker"
+        app:layout_constraintEnd_toStartOf="@+id/minutePicker"
+        app:layout_constraintTop_toTopOf="@+id/minutePicker"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <NumberPicker
+        android:id="@+id/minutePicker"
+        android:layout_width="100dp"
+        android:layout_height="300dp"
+        android:layout_below="@id/hourPicker"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="120dp"
+        android:descendantFocusability="blocksDescendants"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <NumberPicker
+        android:id="@+id/secondPicker"
+        android:layout_width="100dp"
+        android:layout_height="300dp"
+        android:layout_below="@id/minutePicker"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="8dp"
+        android:descendantFocusability="blocksDescendants"
+        android:scrollbarSize="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/minutePicker"
+        app:layout_constraintStart_toEndOf="@+id/minutePicker"
+        app:layout_constraintTop_toTopOf="@+id/minutePicker"
+        app:layout_constraintVertical_bias="1.0" />
 
     <Button
         android:id="@+id/bStart"

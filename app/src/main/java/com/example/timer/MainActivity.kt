@@ -1,59 +1,63 @@
 package com.example.timer
 
-import android.content.res.Resources
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.CountDownTimer
-import android.view.View
+import android.util.TypedValue
 import android.widget.NumberPicker
-import android.widget.TextClock
-import android.widget.TimePicker
+import androidx.annotation.RequiresApi
+import androidx.core.content.ContextCompat
 import com.example.timer.databinding.ActivityMainBinding
-import java.text.SimpleDateFormat
-import java.util.Calendar
 import java.util.Locale
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private var timer: CountDownTimer? = null
-    private lateinit var timePicker: TimePicker
-    private  lateinit var textClock: TextClock
+    @RequiresApi(Build.VERSION_CODES.Q)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        timePicker = binding.timePicker
+        val hourPicker = findViewById<NumberPicker>(R.id.hourPicker)
+        val minutePicker = findViewById<NumberPicker>(R.id.minutePicker)
+        val secondPicker = findViewById<NumberPicker>(R.id.secondPicker)
 
-        val currentTime = Calendar.getInstance()
-        val currentHour = currentTime.get(Calendar.HOUR_OF_DAY)
-        val currentMinute = currentTime.get(Calendar.MINUTE)
-        var minut = 0
-        var hour = 0
+        val hourValues = (0..23).map { it.toString() }.toTypedArray()
+        hourPicker.minValue = 0
+        hourPicker.maxValue = 23
+        hourPicker.displayedValues = hourValues
+        hourPicker.descendantFocusability = NumberPicker.FOCUS_BLOCK_DESCENDANTS
+        hourPicker.textSize = 80f
+        hourPicker.setTextColor(ContextCompat.getColor(this, R.color.white))
 
-        timePicker.hour = currentHour
-        timePicker.minute = currentMinute
+        val minuteValues = (0..59).map { String.format("%02d", it) }.toTypedArray()
+        minutePicker.minValue = 0
+        minutePicker.maxValue = 59
+        minutePicker.displayedValues = minuteValues
+        minutePicker.descendantFocusability = NumberPicker.FOCUS_BLOCK_DESCENDANTS
+        minutePicker.textSize = 80f
+        minutePicker.setTextColor(ContextCompat.getColor(this, R.color.white))
 
-        timePicker.setIs24HourView(true)
+        val secondValues = (0..59).map { String.format("%02d", it) }.toTypedArray()
+        secondPicker.minValue = 0
+        secondPicker.maxValue = 59
+        secondPicker.displayedValues = secondValues
+        secondPicker.descendantFocusability = NumberPicker.FOCUS_BLOCK_DESCENDANTS
+        secondPicker.textSize = 80f
+        secondPicker.setTextColor(ContextCompat.getColor(this, R.color.white))
 
-        val minutePicker = timePicker.findViewById<View>(Resources.getSystem().getIdentifier("minute", "id", "android"))
-        if (minutePicker is NumberPicker) {
-            minutePicker.maxValue = 59
-            minutePicker.minValue = 0
-        }
-
-        timePicker.setOnTimeChangedListener { _, hourOfDay, minute ->
-            val selectedTime = Calendar.getInstance()
-            selectedTime.set(Calendar.HOUR_OF_DAY, hourOfDay)
-            selectedTime.set(Calendar.MINUTE, minute)
-
-            minut = minute
-            hour = hourOfDay
-        }
+        binding.bStart.setBackgroundColor(ContextCompat.getColor(this, R.color.violet))
 
         binding.apply {
             bStart.setOnClickListener {
-                startCountDownTimer((minut * 60 * 1000 + hour * 60 * 60 * 1000).toLong())
+                val selectedHour = hourPicker.value
+                val selectedMinute = minutePicker.value
+                val selectedSecond = secondPicker.value
+                startCountDownTimer(
+                    (selectedHour * 60 * 60 * 1000 + selectedMinute * 60 * 1000 + selectedSecond * 1000).toLong()
+                )
             }
         }
     }
