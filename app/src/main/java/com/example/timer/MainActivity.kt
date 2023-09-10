@@ -1,11 +1,14 @@
 package com.example.timer
 
+import android.opengl.Visibility
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.util.TypedValue
+import android.view.View
 import android.widget.NumberPicker
+import androidx.activity.viewModels
 import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
 import com.example.timer.databinding.ActivityMainBinding
@@ -14,6 +17,7 @@ import java.util.Locale
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private var timer: CountDownTimer? = null
+    private val dataModel: DataModel by viewModels()
     @RequiresApi(Build.VERSION_CODES.Q)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,31 +56,20 @@ class MainActivity : AppCompatActivity() {
 
         binding.apply {
             bStart.setOnClickListener {
+                supportFragmentManager.beginTransaction()
+                    .replace(R.id.fragmentTimer,BlankFragmentTimer.newInstance())
+                    .commit()
+                tvResult.visibility = View.GONE
+                hourPicker.visibility = View.GONE
+                minutePicker.visibility = View.GONE
+                secondPicker.visibility = View.GONE
+                bStart.visibility = View.GONE
+
                 val selectedHour = hourPicker.value
                 val selectedMinute = minutePicker.value
                 val selectedSecond = secondPicker.value
-                startCountDownTimer(
-                    (selectedHour * 60 * 60 * 1000 + selectedMinute * 60 * 1000 + selectedSecond * 1000).toLong()
-                )
+                dataModel.massage.value = (selectedHour * 60 * 60 * 1000 + selectedMinute * 60 * 1000 + selectedSecond * 1000).toLong()
             }
         }
-    }
-
-    private fun startCountDownTimer(timeMillis: Long){
-        timer?.cancel()
-        timer = object : CountDownTimer(timeMillis, 1000) {
-            override fun onTick(timeM: Long) {
-                val hours = (timeM / 3600000).toInt()
-                val minutes = ((timeM % 3600000) / 60000).toInt()
-                val seconds = ((timeM % 60000) / 1000).toInt()
-                val formattedTime = String.format(Locale.getDefault(), "%02d:%02d:%02d", hours, minutes, seconds)
-
-                binding.tvResult.text = formattedTime
-            }
-
-            override fun onFinish() {
-                binding.tvResult.text = "Финиш!"
-            }
-        }.start()
     }
 }

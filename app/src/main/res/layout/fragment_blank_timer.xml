@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".BlankFragmentTimer">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#000000"
+        android:backgroundTint="#000000">
+
+        <Button
+            android:id="@+id/bPauseFragment"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="300dp"
+            android:layout_marginEnd="84dp"
+            app:icon="@android:drawable/ic_media_pause"
+            app:iconSize="26dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvResultFragment" />
+
+        <TextView
+            android:id="@+id/tvResultFragment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0000"
+            android:textColor="#FFFFFF"
+            android:textSize="26sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.343" />
+
+        <Button
+            android:id="@+id/bCloseFragment"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="84dp"
+            app:icon="@android:drawable/screen_background_light"
+            app:iconSize="20dp"
+            app:layout_constraintEnd_toStartOf="@+id/bPauseFragment"
+            app:layout_constraintTop_toTopOf="@+id/bPauseFragment" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</FrameLayout>
