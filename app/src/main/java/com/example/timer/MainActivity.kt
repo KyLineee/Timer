@@ -11,6 +11,7 @@ import android.widget.NumberPicker
 import androidx.activity.viewModels
 import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.LifecycleOwner
 import com.example.timer.databinding.ActivityMainBinding
 import java.util.Locale
 
@@ -71,5 +72,15 @@ class MainActivity : AppCompatActivity() {
                 dataModel.massage.value = (selectedHour * 60 * 60 * 1000 + selectedMinute * 60 * 1000 + selectedSecond * 1000).toLong()
             }
         }
+
+        dataModel.massage2.observe(this, {
+            if(it) {
+                binding.tvResult.visibility = View.VISIBLE
+                hourPicker.visibility = View.VISIBLE
+                minutePicker.visibility = View.VISIBLE
+                secondPicker.visibility = View.VISIBLE
+                binding.bStart.visibility = View.VISIBLE
+            }
+        })
     }
 }
