@@ -46,6 +46,20 @@
             app:layout_constraintEnd_toStartOf="@+id/bPauseFragment"
             app:layout_constraintTop_toTopOf="@+id/bPauseFragment" />
 
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="@style/CircularProgressBar"
+            android:layout_width="296dp"
+            android:layout_height="296dp"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="100dp"
+            android:max="1000"
+            android:progressTint="#2196F3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.495"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </FrameLayout>

@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.LifecycleOwner
@@ -33,6 +34,7 @@ class BlankFragmentTimer : Fragment() {
 
         dataModel.massage.observe(activity as LifecycleOwner, {
             startCountDownTimer(it)
+            time_Millis = it
         })
 
         binding.bPauseFragment.setOnClickListener {
@@ -75,6 +77,10 @@ class BlankFragmentTimer : Fragment() {
                 val seconds = ((timeM % 60000) / 1000).toInt()
                 val formattedTime = String.format(Locale.getDefault(), "%02d:%02d:%02d", hours, minutes, seconds)
 
+                val progressBar: ProgressBar = binding.progressBar
+                val progress = calculateProgress((timeM / 1000).toInt())
+                progressBar.progress = progress
+
                 binding.tvResultFragment.text = formattedTime
             }
 
@@ -97,5 +103,8 @@ class BlankFragmentTimer : Fragment() {
             paused = true
             binding.bPauseFragment.setImageDrawable(ContextCompat.getDrawable(requireContext(), android.R.drawable.ic_media_play))
         }
+    }
+    private fun calculateProgress(time_Second: Int) :Int {
+        return ((1000 * time_Second)/(time_Millis/1000)).toInt()
     }
 }
