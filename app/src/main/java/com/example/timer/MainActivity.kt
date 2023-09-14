@@ -60,7 +60,6 @@ class MainActivity : AppCompatActivity() {
                 supportFragmentManager.beginTransaction()
                     .replace(R.id.fragmentTimer,BlankFragmentTimer.newInstance())
                     .commit()
-                tvResult.visibility = View.GONE
                 hourPicker.visibility = View.GONE
                 minutePicker.visibility = View.GONE
                 secondPicker.visibility = View.GONE
@@ -75,7 +74,6 @@ class MainActivity : AppCompatActivity() {
 
         dataModel.massage2.observe(this, {
             if(it) {
-                binding.tvResult.visibility = View.VISIBLE
                 hourPicker.visibility = View.VISIBLE
                 minutePicker.visibility = View.VISIBLE
                 secondPicker.visibility = View.VISIBLE
