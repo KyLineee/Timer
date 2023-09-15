@@ -18,12 +18,11 @@
             android:layout_height="wrap_content"
             android:text="0000"
             android:textColor="#FFFFFF"
-            android:textSize="26sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.343" />
+            android:textSize="34sp"
+            app:layout_constraintBottom_toBottomOf="@+id/progressBar"
+            app:layout_constraintEnd_toEndOf="@+id/progressBar"
+            app:layout_constraintStart_toStartOf="@+id/progressBar"
+            app:layout_constraintTop_toTopOf="@+id/progressBar" />
 
         <ImageButton
             android:id="@+id/bPauseFragment"
@@ -53,10 +52,9 @@
             android:layout_height="296dp"
             android:layout_centerInParent="true"
             android:layout_marginTop="100dp"
-            android:max="1000"
-            android:progressTint="#2196F3"
+            android:max="24000"
+            android:progressTint="#0B7DD8"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.495"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 

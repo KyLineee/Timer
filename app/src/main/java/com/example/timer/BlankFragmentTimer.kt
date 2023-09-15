@@ -1,5 +1,6 @@
 package com.example.timer
 
+import android.R
 import android.os.Bundle
 import android.os.CountDownTimer
 import androidx.fragment.app.Fragment
@@ -17,7 +18,7 @@ class BlankFragmentTimer : Fragment() {
     private val dataModel: DataModel by activityViewModels()
     lateinit var binding: FragmentBlankTimerBinding
     private var timer: CountDownTimer? = null
-    var time_Millis: Long = 0
+    var timeStart: Long = 0
     private var paused = false
     private var remainingTimeMillis: Long = 0
 
@@ -34,7 +35,7 @@ class BlankFragmentTimer : Fragment() {
 
         dataModel.massage.observe(activity as LifecycleOwner, {
             startCountDownTimer(it)
-            time_Millis = it
+            timeStart = it
         })
 
         binding.bPauseFragment.setOnClickListener {
@@ -69,7 +70,7 @@ class BlankFragmentTimer : Fragment() {
     }
 
     private fun createCountDownTimer(timeMillis: Long): CountDownTimer {
-        return object : CountDownTimer(timeMillis, 1000) {
+        return object : CountDownTimer(timeMillis, 10) {
             override fun onTick(timeM: Long) {
                 remainingTimeMillis = timeM
                 val hours = (timeM / 3600000).toInt()
@@ -78,7 +79,13 @@ class BlankFragmentTimer : Fragment() {
                 val formattedTime = String.format(Locale.getDefault(), "%02d:%02d:%02d", hours, minutes, seconds)
 
                 val progressBar: ProgressBar = binding.progressBar
-                val progress = calculateProgress((timeM / 1000).toInt())
+                var progress = 0
+                if(timeM < 600000) {
+                    progress = calculateProgress((timeM/10).toInt(), false)
+                }
+                else {
+                    progress = calculateProgress((timeM/1000).toInt(), true)
+                }
                 progressBar.progress = progress
 
                 binding.tvResultFragment.text = formattedTime
@@ -92,19 +99,24 @@ class BlankFragmentTimer : Fragment() {
 
     private fun pauseCountDownTimer() {
         timer?.cancel()
-        val playIcon = ContextCompat.getDrawable(requireContext(), android.R.drawable.ic_media_play)
+        val playIcon = ContextCompat.getDrawable(requireContext(), R.drawable.ic_media_play)
         val imageViewDrawable = binding.bPauseFragment.drawable
 
         if (imageViewDrawable != null && imageViewDrawable.constantState != null && playIcon != null && imageViewDrawable.constantState == playIcon.constantState) {
-            binding.bPauseFragment.setImageDrawable(ContextCompat.getDrawable(requireContext(), android.R.drawable.ic_media_pause))
+            binding.bPauseFragment.setImageDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.ic_media_pause))
             startCountDownTimer(remainingTimeMillis)
         }
         else {
             paused = true
-            binding.bPauseFragment.setImageDrawable(ContextCompat.getDrawable(requireContext(), android.R.drawable.ic_media_play))
+            binding.bPauseFragment.setImageDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.ic_media_play))
         }
     }
-    private fun calculateProgress(time_Second: Int) :Int {
-        return ((1000 * time_Second)/(time_Millis/1000)).toInt()
+    private fun calculateProgress(timeNow: Int, secondOrMillis: Boolean) :Int {
+        if(secondOrMillis == true) {
+            return ((24000 * timeNow)/(timeStart/1000)).toInt()
+        }
+        else {
+            return ((24000 * timeNow)/(timeStart/10)).toInt()
+        }
     }
 }

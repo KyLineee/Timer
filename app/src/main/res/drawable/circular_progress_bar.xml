@@ -7,13 +7,13 @@
             android:shape="ring"
             android:thicknessRatio="8"
             android:useLevel="false">
-            <solid android:color="#CCCCCC" />
+            <solid android:color="#424242" />
         </shape>
     </item>
     <!-- Определите прогрессивный круг -->
     <item android:id="@android:id/progress">
         <rotate
-            android:fromDegrees="270"
+            android:fromDegrees="-90"
             android:toDegrees="-90">
             <shape
                 android:innerRadiusRatio="3"
