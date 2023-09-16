@@ -34,7 +34,7 @@ class MainActivity : AppCompatActivity() {
         hourPicker.maxValue = 23
         hourPicker.displayedValues = hourValues
         hourPicker.descendantFocusability = NumberPicker.FOCUS_BLOCK_DESCENDANTS
-        hourPicker.textSize = 80f
+        hourPicker.textSize = 90f
         hourPicker.setTextColor(ContextCompat.getColor(this, R.color.white))
 
         val minuteValues = (0..59).map { String.format("%02d", it) }.toTypedArray()
@@ -42,7 +42,7 @@ class MainActivity : AppCompatActivity() {
         minutePicker.maxValue = 59
         minutePicker.displayedValues = minuteValues
         minutePicker.descendantFocusability = NumberPicker.FOCUS_BLOCK_DESCENDANTS
-        minutePicker.textSize = 80f
+        minutePicker.textSize = 90f
         minutePicker.setTextColor(ContextCompat.getColor(this, R.color.white))
 
         val secondValues = (0..59).map { String.format("%02d", it) }.toTypedArray()
@@ -50,7 +50,7 @@ class MainActivity : AppCompatActivity() {
         secondPicker.maxValue = 59
         secondPicker.displayedValues = secondValues
         secondPicker.descendantFocusability = NumberPicker.FOCUS_BLOCK_DESCENDANTS
-        secondPicker.textSize = 80f
+        secondPicker.textSize = 90f
         secondPicker.setTextColor(ContextCompat.getColor(this, R.color.white))
 
         binding.bStart.setBackgroundColor(ContextCompat.getColor(this, R.color.violet))

@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
-    <!-- Определите фоновый круг -->
+    <!--фоновый круг -->
     <item android:id="@android:id/background">
         <shape
             android:innerRadiusRatio="3"
             android:shape="ring"
-            android:thicknessRatio="8"
+            android:thicknessRatio="14"
             android:useLevel="false">
             <solid android:color="#424242" />
         </shape>
     </item>
-    <!-- Определите прогрессивный круг -->
+    <!--прогрессивный круг -->
     <item android:id="@android:id/progress">
         <rotate
             android:fromDegrees="-90"
@@ -18,7 +18,7 @@
             <shape
                 android:innerRadiusRatio="3"
                 android:shape="ring"
-                android:thicknessRatio="8"
+                android:thicknessRatio="14"
                 android:useLevel="true">
                 <solid android:color="#00FF00" />
             </shape>

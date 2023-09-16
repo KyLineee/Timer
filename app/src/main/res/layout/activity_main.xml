@@ -23,8 +23,8 @@
 
     <NumberPicker
         android:id="@+id/hourPicker"
-        android:layout_width="100dp"
-        android:layout_height="300dp"
+        android:layout_width="105dp"
+        android:layout_height="330dp"
         android:layout_centerHorizontal="true"
         android:layout_marginEnd="8dp"
         android:descendantFocusability="blocksDescendants"
@@ -35,8 +35,8 @@
 
     <NumberPicker
         android:id="@+id/minutePicker"
-        android:layout_width="100dp"
-        android:layout_height="300dp"
+        android:layout_width="105dp"
+        android:layout_height="330dp"
         android:layout_below="@id/hourPicker"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="120dp"
@@ -47,8 +47,8 @@
 
     <NumberPicker
         android:id="@+id/secondPicker"
-        android:layout_width="100dp"
-        android:layout_height="300dp"
+        android:layout_width="105dp"
+        android:layout_height="330dp"
         android:layout_below="@id/minutePicker"
         android:layout_centerHorizontal="true"
         android:layout_marginStart="8dp"
@@ -62,11 +62,13 @@
     <Button
         android:id="@+id/bStart"
         android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="150dp"
+        android:layout_height="60dp"
         android:text="Старт"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/secondPicker"
         app:layout_constraintStart_toStartOf="@+id/hourPicker"
-        app:layout_constraintTop_toBottomOf="@+id/minutePicker" />
+        app:layout_constraintTop_toBottomOf="@+id/minutePicker"
+        app:layout_constraintVertical_bias="0.81" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
